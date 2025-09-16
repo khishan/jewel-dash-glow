@@ -1,42 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Theater Curtain Design System - Red/Golden Theme */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 5 15% 8%;
+    --foreground: 45 100% 95%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 5 20% 12%;
+    --card-foreground: 45 100% 95%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 5 20% 12%;
+    --popover-foreground: 45 100% 95%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 0 80% 50%;
+    --primary-foreground: 45 100% 95%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 45 85% 55%;
+    --secondary-foreground: 5 15% 8%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 5 20% 20%;
+    --muted-foreground: 45 50% 70%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 90% 60%;
+    --accent-foreground: 5 15% 8%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 45 100% 95%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 5 30% 25%;
+    --input: 5 30% 25%;
+    --ring: 45 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Theater Curtain Colors */
+    --curtain-red: 0 80% 50%;
+    --curtain-red-dark: 0 70% 35%;
+    --curtain-gold: 45 85% 55%;
+    --curtain-gold-dark: 45 75% 45%;
+    --curtain-burgundy: 355 60% 25%;
+    --curtain-velvet: 5 20% 12%;
+
+    /* Gradients */
+    --gradient-curtain: linear-gradient(135deg, hsl(var(--curtain-red)), hsl(var(--curtain-burgundy)));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--curtain-gold)), hsl(var(--curtain-gold-dark)));
+    --gradient-stage: linear-gradient(180deg, hsl(var(--curtain-velvet)), hsl(5 15% 8%));
+
+    /* Shadows */
+    --shadow-theater: 0 25px 50px -12px hsl(var(--curtain-red) / 0.4);
+    --shadow-gold: 0 10px 30px -10px hsl(var(--curtain-gold) / 0.3);
+
+    /* Animations */
+    --transition-curtain: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-elegant: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +121,125 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
+  }
+}
+
+@layer components {
+  /* Curtain Opening Animation */
+  @keyframes curtain-open-left {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes curtain-open-right {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes slide-text {
+    0%, 15% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    25%, 75% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+    85%, 100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--curtain-gold) / 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--curtain-gold) / 0.8);
+    }
+  }
+
+  /* Theater Button */
+  .btn-theater {
+    @apply relative px-12 py-6 bg-gradient-to-r from-primary to-accent text-foreground font-bold text-xl rounded-lg;
+    @apply shadow-[var(--shadow-theater)] transition-[var(--transition-elegant)];
+    @apply hover:scale-105 hover:shadow-[var(--shadow-gold)] active:scale-95;
+    background: var(--gradient-curtain);
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  /* Curtain Elements */
+  .curtain-left {
+    @apply fixed top-0 left-0 w-1/2 h-full z-50 transition-[var(--transition-curtain)];
+    background: var(--gradient-curtain);
+    background-size: 100px 100px;
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 10px,
+        hsl(var(--curtain-red-dark) / 0.3) 10px,
+        hsl(var(--curtain-red-dark) / 0.3) 20px
+      );
+  }
+
+  .curtain-right {
+    @apply fixed top-0 right-0 w-1/2 h-full z-50 transition-[var(--transition-curtain)];
+    background: var(--gradient-curtain);
+    background-size: 100px 100px;
+    background-image: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 10px,
+        hsl(var(--curtain-red-dark) / 0.3) 10px,
+        hsl(var(--curtain-red-dark) / 0.3) 20px
+      );
+  }
+
+  .curtain-opened .curtain-left {
+    animation: curtain-open-left 1.5s ease-in-out forwards;
+  }
+
+  .curtain-opened .curtain-right {
+    animation: curtain-open-right 1.5s ease-in-out forwards;
+  }
+
+  /* Slideshow Text */
+  .slideshow-text {
+    @apply fixed inset-0 flex items-center justify-center z-40 pointer-events-none;
+    @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-center px-4 sm:px-8;
+    background: var(--gradient-gold);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px hsl(var(--curtain-gold) / 0.5);
+    animation: slide-text 4s ease-in-out infinite;
+  }
+
+  /* Landing Animation */
+  .landing-content {
+    animation: fade-in-up 1s ease-out;
   }
 }

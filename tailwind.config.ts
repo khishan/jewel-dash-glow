@@ -47,6 +47,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        curtain: {
+          red: "hsl(var(--curtain-red))",
+          "red-dark": "hsl(var(--curtain-red-dark))",
+          gold: "hsl(var(--curtain-gold))",
+          "gold-dark": "hsl(var(--curtain-gold-dark))",
+          burgundy: "hsl(var(--curtain-burgundy))",
+          velvet: "hsl(var(--curtain-velvet))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -57,6 +65,19 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundImage: {
+        "gradient-curtain": "var(--gradient-curtain)",
+        "gradient-gold": "var(--gradient-gold)",
+        "gradient-stage": "var(--gradient-stage)",
+      },
+      boxShadow: {
+        theater: "var(--shadow-theater)",
+        gold: "var(--shadow-gold)",
+      },
+      fontFamily: {
+        display: ["Playfair Display", "serif"],
+        sans: ["Inter", "sans-serif"],
       },
       borderRadius: {
         lg: "var(--radius)",
