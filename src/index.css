@@ -39,11 +39,11 @@
     --radius: 0.75rem;
 
     /* Theater Curtain Colors */
-    --curtain-red: 0 80% 50%;
-    --curtain-red-dark: 0 70% 35%;
+    --curtain-red: 0 85% 45%;
+    --curtain-red-dark: 0 75% 30%;
     --curtain-gold: 45 85% 55%;
     --curtain-gold-dark: 45 75% 45%;
-    --curtain-burgundy: 355 60% 25%;
+    --curtain-burgundy: 0 80% 20%;
     --curtain-velvet: 5 20% 12%;
 
     /* Gradients */
@@ -235,7 +235,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 30px hsl(var(--curtain-gold) / 0.5);
-    animation: slide-text 4s ease-in-out infinite;
+    animation: fade-in-up 1s ease-out;
   }
 
   /* Landing Animation */
